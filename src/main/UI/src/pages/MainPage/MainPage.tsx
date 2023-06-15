@@ -1,7 +1,7 @@
 import React from "react";
 import { displayPartsToString } from "typescript";
 import "./mainPage.css";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 function MainPage() {
     return(

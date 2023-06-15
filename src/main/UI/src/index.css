@@ -7,7 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--main-bg-color);
+  /* background-color: var(--main-bg-color); */
   color: var(--main-text-color);
 }
 
@@ -24,4 +24,5 @@ a{
 :root {
   --main-bg-color: #faf7f2;
   --main-text-color: #455d54;
+  --btn-hover-color: #5c8073;
 }
