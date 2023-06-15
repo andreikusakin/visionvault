@@ -1,0 +1,31 @@
+import React from "react";
+import { displayPartsToString } from "typescript";
+import "./mainPage.css";
+import { Outlet } from "react-router-dom";
+
+function MainPage() {
+    return(
+        <div className="main-page-wrapper">
+            <Outlet />
+            <header className="navbar">
+                    <a href="/" className="nav-logo">VisionVault</a>
+                <div className="nav-menu">
+                    <a href="/login" className="nav-btn">Login</a>
+                    <a href="" className="nav-btn">Sign Up</a>
+                </div>
+            </header>
+            <div className="main-page-bg">
+                <div className="main-page-image"></div>
+            </div>
+            <div className="main-page-content">
+                <h1>Capture Moments</h1>
+                <h1>Deliver Memories</h1>
+                <p>Share beautiful photo galleries with your clients.</p>    
+                <a href="">Get Started</a>
+                
+            </div>
+        </div>
+    )
+}
+
+export default MainPage;

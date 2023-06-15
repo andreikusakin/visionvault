@@ -1,0 +1,137 @@
+.main-page-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    
+}
+
+.nav-logo{
+    padding: 2rem;
+    text-decoration: none;
+    color: #455d54;
+    font-size: 2em;
+    font-family: 'DM Serif Display', serif;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.nav-btn{
+    padding: .75rem;
+    min-width: 4rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--main-text-color);
+    font-weight: 500;
+}
+.nav-btn:hover{
+    background-color: var(--main-text-color);
+    color: var(--main-bg-color);
+    cursor: pointer;
+    transition: all .2s ease-out
+}
+
+.main-page-bg{
+    /* background: #000; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    position: absolute;
+    z-index: -1;
+}
+
+.main-page-image{
+    width: 60vw;
+    height: 60vh;
+    padding-left: 20rem;
+    background-image: url('/public/pics/DJI_0059.jpg');
+    background-position: center; 
+    background-repeat: no-repeat;
+    opacity: 1;
+    margin-left: auto;
+    background-size: cover;
+    
+}
+
+.main-page-content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;  
+}
+.main-page-content h1{
+    font-family: 'DM Serif Display', serif;
+    font-size: 3em;
+    font-weight: 100;
+    line-height: 0.01;
+}
+.main-page-content h1:nth-child(1){
+    margin-left: 15vw;
+}
+.main-page-content h1:nth-child(2){
+    margin-left: 20vw;
+}
+.main-page-content p{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    margin-left: auto;
+    margin-right: 20vw;
+    padding-top: .2rem;
+    color: white;
+}
+.main-page-content a{
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 1.2em;
+    letter-spacing: .1em;
+    color: var(--main-bg-color);
+    background: var(--main-text-color);
+    padding: 1rem;
+    width: 15rem;
+    /* margin-top: 5rem; */
+    margin-left: auto;
+    margin-right: 20vw;
+    border: #455d54 1px solid;
+}
+
+.main-page-content a:hover{
+    background: none;
+    color: var(--main-text-color);
+    cursor: pointer;
+    transition: all .2s ease-out;
+    border: var(--main-text-color) 1px solid;
+}
+
+@media (max-width:600px) {
+    .main-page-content a{
+        margin-right: auto;
+    }
+
+    .main-page-content h1:nth-child(1){
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .main-page-content h1:nth-child(2){
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
