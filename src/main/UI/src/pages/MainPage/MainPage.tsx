@@ -10,8 +10,8 @@ function MainPage() {
             <header className="navbar">
                     <a href="/" className="nav-logo">VisionVault</a>
                 <div className="nav-menu">
-                    <a href="/login" className="nav-btn">Login</a>
-                    <a href="" className="nav-btn">Sign Up</a>
+                    <Link to="/login" className="nav-btn">Login</Link>
+                    <Link to="/signup" className="nav-btn">Sign Up</Link>
                 </div>
             </header>
             <div className="main-page-bg">

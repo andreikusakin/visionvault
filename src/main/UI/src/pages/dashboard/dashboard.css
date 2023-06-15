@@ -1,10 +1,55 @@
 .dashboard-wrapper{
-    background-color: white;
+    
+}
+
+.dashboard-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    
 }
 
 .logo-dashboard{
     font-family: 'DM Serif Display', serif;
     font-size: 1.4rem;
-    color: black;
+    color: var(--main-text-color);
     
+}
+
+.btn-add-gallery{
+    padding: .75rem 2rem;
+    min-width: 4rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 500;
+    font-size: 1.2rem;
+    background-color: var(--main-text-color);
+    margin: 1rem;
+    transition: all .2s ease-out;
+    margin: 3rem;
+}
+
+.btn-add-gallery:hover{
+    background-color: var(--btn-hover-color);
+    transition: all .2s ease-out;
+}
+
+.gallaries-grid{
+    max-width: 1600px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));
+    grid-gap: 1rem;
+}
+
+@media (max-width:600px) {
+    .gallaries-grid{
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+    .btn-add-gallery{
+        font-size: 1rem;
+    }
 }

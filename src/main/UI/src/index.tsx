@@ -5,9 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage';
-import Login from './pages/login/Login';
+import Login from './components/login/Login';
 import MainPage from './pages/MainPage/MainPage';
 import Dashboard from './pages/dashboard/Dashboard';
+import CreateGallery from './components/createGallery/CreateGallery';
+import SignUp from './components/signUp/SignUp';
 
 const router = createBrowserRouter([
   {
@@ -18,13 +20,23 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/signup',
+        element: <SignUp />,
       }
     ]
   },
   {
     path: '/dashboard',
     element: <Dashboard />,
-    errorElement: <ErrorPage />
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: 'creategallery',
+        element: <CreateGallery />
+      }
+    ]
   }
   
 ])

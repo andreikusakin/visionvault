@@ -34,7 +34,7 @@ export default function Login() {
   return (
     <div className='login-wrapper'>
       <div className='login-window'>
-      <form onSubmit={handleSubmit}>
+      <form className='login-form' onSubmit={handleSubmit}>
         
         
         <input placeholder='Email' autoComplete='username' type="email" value={email} onChange={e => setEmail(e.target.value)} required />
