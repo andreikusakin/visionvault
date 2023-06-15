@@ -17,6 +17,7 @@ public class Gallery {
     private Long id;
 
     private String name;
+    private String password;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
