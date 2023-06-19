@@ -1,37 +1,126 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
-import './createGallery.css'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./createGallery.css";
+import axios from "axios";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function CreateGallery() {
-  
   const [photoList, setPhotoList] = useState<string[]>([]);
-  const [photoUrl, setPhotoUrl] = useState('');
+  const [photoUrl, setPhotoUrl] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [password, setPassword] = useState("");
 
   const addPhoto = () => {
-    setPhotoList(prevList => [...prevList, photoUrl]);
-    setPhotoUrl(''); 
+    setPhotoList((prevList) => [...prevList, photoUrl]);
+    setPhotoUrl("");
+  };
+
+  const deletePhoto = (index: number) => {
+    const newPhotoList = [...photoList];
+    newPhotoList.splice(index, 1);
+    setPhotoList(newPhotoList);
+  };
+
+  const userId = localStorage.getItem("authUserId");
+
+  function onSubmit(e: { preventDefault: () => void }) {
+    e.preventDefault();
+
+    const galleryData = {
+      userId: userId,
+      name: name,
+      description: description,
+      password: password,
+      pictures: photoList,
+    };
+
+    axios
+      .post("/creategallery", galleryData)
+      .then((res) => {
+        console.log("Succesfull response", res.data);
+        // window.location.href = "/dashboard";
+      })
+      .catch((error) => console.error(error));
   }
-  
 
   return (
-    <div className='create-gallery-wrapper'><Link to="/dashboard" className="btn-add-gallery">Back</Link>
-    <form>
-        
-        
-        <input placeholder='Gallery Name' autoComplete='username' type="email"  required />
-      
-      
-        <input placeholder='Gallery Password' type="password"  required />
-        <input placeholder='Link to Photo' type='url' value={photoUrl}  required onChange={e => setPhotoUrl(e.target.value)} /><button type="button" onClick={addPhoto}>Add Photo</button>
-        <div className='photo-list'>
-          {photoList.map((photoUrl, index) => (
-            <div key={index}>{photoUrl}</div>
-          ))}
-        </div>
-      
-      <button type="submit">Submit</button>
-    </form>
+    <div className="create-gallery-wrapper">
+      <div className="create-gallery-window">
+        <Link to="/dashboard" className="create-gallery-close">
+          <CloseIcon fontSize="large" />
+        </Link>
+        <form className="create-gallery-form" onSubmit={onSubmit}>
+          <input
+            placeholder="Gallery Name"
+            autoComplete="username"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="input-field"
+          />
+
+          <input
+            placeholder="Description"
+            autoComplete="Description"
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="input-field"
+          />
+          <label>
+            Incorporate a password security measure for your gallery, ensuring
+            that the gallery's content can be accessed only upon entering the
+            correct password. If you wish for your gallery to be publicly
+            accessible without the necessity of a password, simply leave the
+            password field blank.{" "}
+          </label>
+          <input
+            placeholder="Gallery Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="input-field"
+          />
+
+          <input
+            placeholder="Link to Photo"
+            type="url"
+            value={photoUrl}
+            onChange={(e) => setPhotoUrl(e.target.value)}
+            className="input-field"
+          />
+          <button type="button" onClick={addPhoto} className="submit-btn">
+            Add Photo
+          </button>
+          <div className="photo-list">
+            <div className="photo-list-grid">
+              {photoList.map((photoUrl, index) => (
+                <div className="grid-item-photolist" key={index}>
+                  <img
+                    className="create-gallery-photo"
+                    src={photoUrl}
+                    alt="photo"
+                  />
+                  <button
+                    onClick={() =>
+                      setPhotoList(photoList.filter((url, i) => i !== index))
+                    }
+                    className="delete-button"
+                  >
+                    <CloseIcon className="close-icon-small" fontSize="small" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+                      
+          <button type="submit" className="submit-btn">
+            Create Gallery
+          </button>
+        </form>
+      </div>
     </div>
-    
-  )
+  );
 }
