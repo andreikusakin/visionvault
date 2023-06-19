@@ -46,4 +46,10 @@ public class GalleryController {
         });
         return new ResponseEntity<>(createdGallery, HttpStatus.CREATED);
     }
+
+    @RequestMapping(path = "/mygalleries", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Iterable<Gallery>> getMyGalleries(@RequestBody Long userId) {
+        Iterable<Gallery> galleries = galleryRepository.findAllByUserId(userId);
+        return new ResponseEntity<>(galleries, HttpStatus.OK);
+    }
 }
