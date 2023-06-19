@@ -10,3 +10,29 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 10;
 }
+
+.sign-up-window{
+    display: block;
+    position: absolute;
+    padding: 5rem;
+    top: 10%;
+    width: 20rem;
+    height: 25rem;
+    background-color: #fff;
+}
+
+@media (max-width:600px) {
+    .sign-up-window{
+        top: 0;
+        width: 90%;
+        height: 90%;
+    }
+    .login-close{
+        position: absolute;
+        top: 1rem;
+        right: 5rem;
+        
+        
+    }
+
+}
