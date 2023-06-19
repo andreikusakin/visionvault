@@ -24,3 +24,13 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 10;
 }
+
+.gallery-item-flexbox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gallery-item-icons{
+    padding: .5rem;
+}
