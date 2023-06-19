@@ -21,7 +21,7 @@ function MainPage() {
                 <h1>Capture Moments</h1>
                 <h1>Deliver Memories</h1>
                 <p>Share beautiful photo galleries with your clients.</p>    
-                <a href="">Get Started</a>
+                <Link to="/SignUp">Get Started</Link>
                 
             </div>
         </div>
