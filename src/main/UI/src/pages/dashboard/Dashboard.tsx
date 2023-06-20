@@ -9,7 +9,8 @@ import { Gallery } from "../../components/interfaces";
 
 export default function Dashboard() {
 
-  const [gallerriesArray, setGalleriesArray] = useState<Gallery[]>([]);
+  const [galleriesArray, setGalleriesArray] = useState<Gallery[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const [isUserId, setIsUserId] = useState(
     localStorage.getItem("authUserId") !== null
@@ -50,10 +51,18 @@ export default function Dashboard() {
         <Link to="./creategallery" className="btn-add-gallery">
           Create Gallery
         </Link>
+        <input
+              type="text"
+              placeholder="Search"
+              onChange={e => setSearchTerm(e.target.value)}
+            />
         <div className="gallaries-grid">
-          {gallerriesArray.map((gallery) => (<GalleryItem key={gallery.id}
-            gallery={gallery}
-          />))}
+        {galleriesArray
+                .filter(gallery => gallery.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                .map(gallery => (
+                  <GalleryItem key={gallery.id} gallery={gallery} />
+                ))
+              }
           
         </div>
         <Outlet />
