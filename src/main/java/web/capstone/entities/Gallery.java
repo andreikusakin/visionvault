@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "galleries")
+@Table(name = "galleries", indexes = {@Index(name = "index_user_id", columnList = "user_id")})
 public class Gallery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

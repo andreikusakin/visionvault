@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "pictures")
+@Table(name = "pictures", indexes = {@Index(name = "index_gallery_id", columnList = "gallery_id")})
 
 public class Picture {
     @Id

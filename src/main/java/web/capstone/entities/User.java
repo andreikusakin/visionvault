@@ -7,9 +7,10 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "users")
-
-
+@Table(name = "users", indexes = {
+        @Index(name = "index_email", columnList = "email"),
+        @Index(name = "index_password", columnList = "password")
+})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
