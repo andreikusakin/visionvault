@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./dashboard.css";
 import GalleryItem from "../../components/galleryItem/GalleryItem";
-import CreateGallery from "../../components/createGallery/CreateGallery";
 import { Link, Outlet } from "react-router-dom";
+import axios from "axios";
+import { Gallery } from "../../components/interfaces";
 
-export interface Photo {
-  url: string;
-}
+
 
 export default function Dashboard() {
+
+  const [gallerriesArray, setGalleriesArray] = useState<Gallery[]>([]);
+
   const [isUserId, setIsUserId] = useState(
     localStorage.getItem("authUserId") !== null
   );
@@ -20,6 +22,17 @@ export default function Dashboard() {
 
   console.log(localStorage.getItem("authUserId") + "USER ID");
   console.log(localStorage.getItem("authBusinessName") + "Business Name");
+
+  useEffect(() => {axios
+    .get('/mygalleries', {
+      params: {
+        userId: localStorage.getItem("authUserId")
+      }
+    })
+    .then((res) => {
+      setGalleriesArray(res.data);
+    })
+    .catch((error) => console.error(error));}, []);
 
   return (
     <div className="dashboard-wrapper">
@@ -38,11 +51,10 @@ export default function Dashboard() {
           Create Gallery
         </Link>
         <div className="gallaries-grid">
-          <GalleryItem
-            photo={{
-              url: "https://ippei-janine.com/photography/wp-content/uploads/DSC03503.jpg",
-            }}
-          />
+          {gallerriesArray.map((gallery) => (<GalleryItem key={gallery.id}
+            gallery={gallery}
+          />))}
+          
         </div>
         <Outlet />
       </div></>

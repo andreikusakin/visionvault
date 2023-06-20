@@ -10,6 +10,8 @@ import MainPage from './pages/MainPage/MainPage';
 import Dashboard from './pages/dashboard/Dashboard';
 import CreateGallery from './components/createGallery/CreateGallery';
 import SignUp from './components/signUp/SignUp';
+import EditGallery from './components/editGallery/EditGallery';
+
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: 'creategallery',
         element: <CreateGallery />
+      },
+      {
+        path: 'editgallery/:id',
+        element: <EditGallery />
       }
     ]
   }
@@ -50,7 +56,4 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

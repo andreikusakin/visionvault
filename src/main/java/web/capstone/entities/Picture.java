@@ -1,5 +1,6 @@
 package web.capstone.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,9 +15,9 @@ public class Picture {
 
     private String url;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "gallery_id")
+    @JsonIgnore
     private Gallery gallery;
-
 
 }

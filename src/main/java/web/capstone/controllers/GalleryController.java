@@ -3,10 +3,7 @@ package web.capstone.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import web.capstone.dao.GalleryRepository;
 import web.capstone.dao.PictureRepository;
 import web.capstone.dao.UserRepository;
@@ -14,6 +11,12 @@ import web.capstone.entities.Gallery;
 import web.capstone.entities.Picture;
 import web.capstone.entities.User;
 import web.capstone.model.request.CreateGalleryRequest;
+import web.capstone.model.request.UpdateGalleryRequest;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("")
@@ -47,9 +50,55 @@ public class GalleryController {
         return new ResponseEntity<>(createdGallery, HttpStatus.CREATED);
     }
 
-    @RequestMapping(path = "/mygalleries", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Iterable<Gallery>> getMyGalleries(@RequestBody Long userId) {
-        Iterable<Gallery> galleries = galleryRepository.findAllByUserId(userId);
-        return new ResponseEntity<>(galleries, HttpStatus.OK);
+    @GetMapping(path = "/mygalleries")
+    public ResponseEntity<List<Gallery>> getMyGalleries(@RequestParam Long userId) {
+        List<Gallery> galleries = galleryRepository.findAllByUserId(userId);
+        List<Gallery> galleriesWithCovers = galleries.stream().peek(gallery -> {
+            List<Picture> pictures = pictureRepository.findPicturesByGalleryId(gallery.getId());
+            pictures.stream().findFirst().ifPresent(p -> gallery.setCoverUrl(p.getUrl()));
+            gallery.setPictures(Set.copyOf(pictures));
+        }).collect(Collectors.toList());
+        return new ResponseEntity<>(galleriesWithCovers, HttpStatus.OK);
     }
+
+    @GetMapping(path = "/mygallery")
+    public ResponseEntity<Gallery> getMyGalleries(@RequestParam Long id, @RequestParam Long userId) {
+        Optional<Gallery> maybeGallery = galleryRepository.findByIdAndUserId(id, userId);
+        if (maybeGallery.isPresent()) {
+            Gallery gallery = maybeGallery.get();
+            List<Picture> pictures = pictureRepository.findPicturesByGalleryId(gallery.getId());
+            gallery.setPictures(Set.copyOf(pictures));
+            return new ResponseEntity<>(gallery, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(path = "/updategallery", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Gallery> updateGallery(@RequestBody UpdateGalleryRequest request) {
+        Gallery gallery = galleryRepository.findById(request.getId()).get();
+
+        gallery.setName(request.getName());
+        gallery.setDescription(request.getDescription());
+        gallery.setPassword(request.getPassword());
+        Gallery updatedGallery = galleryRepository.save(gallery);
+
+        pictureRepository.deleteAllByGalleryId(request.getId());
+
+        request.getPictures().forEach(pictureUrl -> {
+            Picture picture = new Picture();
+            picture.setGallery(updatedGallery);
+            picture.setUrl(pictureUrl);
+            pictureRepository.save(picture);
+        });
+
+        return new ResponseEntity<>(updatedGallery, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/gallery/{id}")
+    public void deleteGallery(@PathVariable Long id) {
+        pictureRepository.deleteAllByGalleryId(id);
+        galleryRepository.deleteById(id);
+    }
+
 }

@@ -1,9 +1,9 @@
 package web.capstone.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.Instant;
 import java.util.Date;
 import java.util.Set;
 
@@ -25,9 +25,12 @@ public class Gallery {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "gallery", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Picture> pictures;
+
+    private String coverUrl;
 
 }
