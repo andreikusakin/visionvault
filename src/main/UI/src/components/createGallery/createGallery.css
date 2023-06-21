@@ -9,6 +9,7 @@
     width: 100vw;
     background: rgba(0, 0, 0, 0.5);
     z-index: 10;
+    overflow: auto;
 }
 
 .create-gallery-window{
@@ -18,6 +19,7 @@
     background-color: white;
     top: 15%;
     padding: 5rem;
+    
 }
 
 .create-gallery-close{
@@ -82,7 +84,16 @@
 }
 
 @media (max-width:768px){
-    .create-gallery-window{
-        width: 90%;
+    .create-gallery-wrapper{
+        background: white;
     }
+    .create-gallery-window{
+        width: 100%;
+        height: 100%;
+        top: 0;
+        padding: 6rem 0;
+    }
+    /* .create-gallery-close{
+        right: 5rem;
+    } */
 }

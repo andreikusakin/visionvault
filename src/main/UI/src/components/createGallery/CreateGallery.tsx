@@ -39,7 +39,7 @@ export default function CreateGallery() {
       .post("/creategallery", galleryData)
       .then((res) => {
         console.log("Succesfull response", res.data);
-        // window.location.href = "/dashboard";
+        window.location.href = "/dashboard";
       })
       .catch((error) => console.error(error));
   }
@@ -72,9 +72,7 @@ export default function CreateGallery() {
           <label>
             Incorporate a password security measure for your gallery, ensuring
             that the gallery's content can be accessed only upon entering the
-            correct password. If you wish for your gallery to be publicly
-            accessible without the necessity of a password, simply leave the
-            password field blank.{" "}
+            correct password.
           </label>
           <input
             placeholder="Gallery Password"
@@ -82,6 +80,7 @@ export default function CreateGallery() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="input-field"
+            required
           />
 
           <input
