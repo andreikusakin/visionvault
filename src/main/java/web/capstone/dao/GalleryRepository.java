@@ -18,4 +18,7 @@ public interface GalleryRepository extends JpaRepository<Gallery, Long> {
 
     @Query("SELECT g FROM Gallery g WHERE g.id = ?1 And g.user.id = ?2")
     Optional<Gallery> findByIdAndUserId(Long id, Long userId);
+
+    @Query("SELECT g FROM Gallery g WHERE g.id = ?1 And g.password = ?2")
+    Optional<Gallery> findByIdAndPassword(Long id, String password);
 }
