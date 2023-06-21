@@ -12,7 +12,7 @@ export default function EditGallery() {
   const [description, setDescription] = useState("");
   const [password, setPassword] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
-  let { id } = useParams();
+    const { id } = useParams();
 
   const fetchGallery = async () => {
     try {
@@ -62,8 +62,27 @@ console.log("updateGallery");
       .catch((error) => console.error(error));
   }
 
-  const GalleryForm = () => (
-    <form className="create-gallery-form" onSubmit={updateGallery}>
+  
+
+  const PhotoItem = ({ url, index }: { url: string; index: number }) => (
+    <div className="grid-item-photolist">
+      <img className="create-gallery-photo" src={url} alt="photo" />
+      <button
+        onClick={() => setPhotoList(photoList.filter((_, i) => i !== index))}
+        className="delete-button"
+      >
+        <CloseIcon className="close-icon-small" fontSize="small" />
+      </button>
+    </div>
+  );
+
+  return (
+    <div className="create-gallery-wrapper">
+      <div className="create-gallery-window">
+        <Link to="/dashboard" className="create-gallery-close">
+          <CloseIcon fontSize="large" />
+        </Link>
+        <form className="create-gallery-form" onSubmit={updateGallery}>
       <input
         placeholder="Gallery Name"
         autoComplete="username"
@@ -106,46 +125,19 @@ console.log("updateGallery");
       <button type="button" onClick={addPhoto} className="submit-btn">
         Add Photo
       </button>
-      <PhotoList />
-
-      <button type="submit" className="submit-btn">
-        Save Gallery
-      </button>
-    </form>
-  );
-
-  const PhotoList = () => (
-    <div className="photo-list">
+      <div className="photo-list">
       <div className="photo-list-grid">
         {photoList.map((photoUrl, index) => (
           <PhotoItem key={index} url={photoUrl} index={index} />
         ))}
       </div>
     </div>
-  );
 
-  const PhotoItem = ({ url, index }: { url: string; index: number }) => (
-    <div className="grid-item-photolist">
-      <img className="create-gallery-photo" src={url} alt="photo" />
-      <button
-        onClick={() => setPhotoList(photoList.filter((_, i) => i !== index))}
-        className="delete-button"
-      >
-        <CloseIcon className="close-icon-small" fontSize="small" />
+      <button type="submit" className="submit-btn">
+        Save Gallery
       </button>
-    </div>
-  );
-
-  return gallery ? (
-    <div className="create-gallery-wrapper">
-      <div className="create-gallery-window">
-        <Link to="/dashboard" className="create-gallery-close">
-          <CloseIcon fontSize="large" />
-        </Link>
-        <GalleryForm />
+    </form>
       </div>
     </div>
-  ) : (
-    <div>Loading...</div>
-  );
+  )
 }
