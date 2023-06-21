@@ -8,15 +8,11 @@ export default function Login() {
   const [businessName, setBusinessName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [isError, setIsError] = useState(false);
   const [authUserId, setAuthUserId] = useState();
   const [authBusinessName, setAuthBusinessName] = useState("");
 
-
-
-
   const navigate = useNavigate();
-
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -34,8 +30,14 @@ export default function Login() {
         localStorage.setItem("authUserId", res.data.id);
         localStorage.setItem("authBusinessName", res.data.businessName);
         navigate("/dashboard");
+        setIsError(false);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        if (error.response) {
+          setIsError(true);
+        }
+      });
   };
 
   return (
@@ -71,6 +73,7 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          {isError && <p className="password-error">Your password is incorrect or this account doesn't exist.</p>}
 
           <button type="submit" className="submit-btn">
             Login

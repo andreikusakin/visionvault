@@ -57,12 +57,19 @@
     color: white;
     transition: all .2s ease-out;
     margin-bottom: 1rem;
+    
 }
 
 .submit-btn:hover{
     background-color: var(--btn-hover-color);
     cursor: pointer;
     
+}
+
+.incorrect-pw{
+    color: red;
+    font-size: .8rem;
+    margin-bottom: 1rem;
 }
 
 @media (max-width:600px) {
