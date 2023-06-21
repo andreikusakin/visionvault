@@ -23,4 +23,12 @@ public class Event {
     @JoinColumn(name = "gallery_id")
     @JsonIgnore
     private Gallery gallery;
+
+    public Event(String email, Date date, Gallery gallery) {
+        this.email = email;
+        this.date = date;
+        this.gallery = gallery;
+    }
+
+    public Event() {}
 }
