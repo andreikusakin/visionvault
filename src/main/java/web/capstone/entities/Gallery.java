@@ -19,11 +19,9 @@ public class Gallery {
     private String name;
     private String password;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
