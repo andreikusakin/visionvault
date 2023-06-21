@@ -5,7 +5,7 @@ import web.capstone.dao.EventRepository;
 import web.capstone.dao.GalleryRepository;
 import web.capstone.entities.Event;
 import web.capstone.entities.Gallery;
-import web.capstone.model.request.Report;
+import web.capstone.model.Report;
 
 import java.util.List;
 

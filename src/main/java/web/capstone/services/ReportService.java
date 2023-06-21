@@ -1,6 +1,6 @@
 package web.capstone.services;
 
-import web.capstone.model.request.Report;
+import web.capstone.model.Report;
 
 import java.util.List;
 
