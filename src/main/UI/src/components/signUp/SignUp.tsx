@@ -8,9 +8,15 @@ export default function SignUp() {
   const [businessName, setBusinessName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
+
+    if(password.length < 8) {
+      setPasswordError('Password must be at least 8 characters long');
+      return
+    }
 
     const user = {
       businessName: businessName,
@@ -48,6 +54,7 @@ export default function SignUp() {
             type="text"
             value={businessName}
             onChange={(e) => setBusinessName(e.target.value)}
+            required
           />
 
           <input
@@ -67,6 +74,8 @@ export default function SignUp() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
+          <p className="password-error">{passwordError}</p>
 
           <button type="submit" className="submit-btn">
             Sign Up

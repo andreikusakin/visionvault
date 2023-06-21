@@ -21,6 +21,12 @@
     background-color: #fff;
 }
 
+.password-error{
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
 @media (max-width:600px) {
     .sign-up-window{
         top: 0;
