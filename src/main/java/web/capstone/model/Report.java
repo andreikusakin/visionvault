@@ -1,4 +1,4 @@
-package web.capstone.model.request;
+package web.capstone.model;
 
 import lombok.Data;
 import web.capstone.entities.Event;
