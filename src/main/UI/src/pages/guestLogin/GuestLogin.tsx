@@ -24,7 +24,8 @@ export default function GuestLogin() {
         setCoverUrl(res.data.coverUrl);
         console.log("Succesfully ", res.data);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {console.error(error)
+      window.location.href = "/404"});
   }, []);
 
   function onSubmit(e: { preventDefault: () => void }) {
@@ -96,8 +97,8 @@ export default function GuestLogin() {
         {isSuccess && (
           <div className="pictures">
             <h3 className="gallery-name" style={{ color: "var(--main-text-color)"}}>{galleryName}</h3>
-            {pictures.map((picture) => (
-              <img src={picture.url} />
+            {[...pictures].reverse().map((picture) => (
+              <img src={picture.url} key={picture.id} />
             ))}
           </div>
         )}
