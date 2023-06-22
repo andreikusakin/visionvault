@@ -37,7 +37,9 @@ export default function GalleryItem(props: GalleryItemProps) {
        
         <div>
           <Link to={`./editgallery/${gallery.id}`} className="gallery-item-icons"><ModeEditIcon /></Link>
-          <Link to={`../guestlogin/${gallery.id}`} className="gallery-item-icons"><IosShareIcon /></Link>
+          <a href={`../guestlogin/${gallery.id}`} target="_blank" rel="noopener noreferrer" className="gallery-item-icons">
+  <IosShareIcon />
+</a>
           <button onClick={() => setIsModalOpen(true)} className="gallery-item-icons"><DeleteForeverIcon /></button>
           
         </div>
