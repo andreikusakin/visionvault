@@ -9,13 +9,14 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
-    if(password.length < 8) {
-      setPasswordError('Password must be at least 8 characters long');
-      return
+    if (password.length < 8) {
+      setPasswordError("Password must be at least 8 characters long");
+      return;
     }
 
     const user = {
@@ -26,12 +27,17 @@ export default function SignUp() {
 
     axios
       .post(`/users`, user)
-        .then(res => {
-          console.log(res);
-          console.log(res.data);
-          window.location.href = "/login";
-        })
-      .catch((error) => console.error(error));
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        window.location.href = "/login";
+      })
+      .catch((error) => {
+        console.error(error);
+        if (error.response && error.response.status === 409) {
+          setIsError(true);
+        }
+      });
   };
 
   return (
@@ -41,12 +47,12 @@ export default function SignUp() {
           <CloseIcon fontSize="large" />
         </Link>
         <h2 className="login-title">Create your new account</h2>
-          <p className="login-subtitle">
+        <p className="login-subtitle">
           Already have an account?{" "}
-            <Link to="/Login" className="subtitle-signup-link">
-              Log in
-            </Link>
-          </p>
+          <Link to="/Login" className="subtitle-signup-link">
+            Log in
+          </Link>
+        </p>
         <form onSubmit={handleSubmit} className="login-form">
           <input
             className="input-field"
@@ -65,7 +71,11 @@ export default function SignUp() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-
+          {isError && (
+            <p className="password-error">
+              A user with this email already exists.
+            </p>
+          )}
           <input
             className="input-field"
             placeholder="Password"
