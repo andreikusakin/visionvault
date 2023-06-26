@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import web.capstone.dao.UserRepository;
 import web.capstone.entities.User;
 import web.capstone.model.request.AuthenticateUserRequest;
@@ -16,6 +13,7 @@ import web.capstone.model.request.AuthenticateUserRequest;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "https://wgu-visionvault-client-fd3e7c032ecb.herokuapp.com")
 @RequestMapping("")
 public class UserController {
     final UserRepository userRepository;

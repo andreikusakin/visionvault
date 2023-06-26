@@ -22,6 +22,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "https://wgu-visionvault-client-fd3e7c032ecb.herokuapp.com")
 @RequestMapping("")
 public class GalleryController {
     final GalleryRepository galleryRepository;

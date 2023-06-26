@@ -2,16 +2,14 @@ package web.capstone.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import web.capstone.model.Report;
 import web.capstone.services.ReportService;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "https://wgu-visionvault-client-fd3e7c032ecb.herokuapp.com")
 @RequestMapping("")
 public class ReportController {
     final ReportService reportService;

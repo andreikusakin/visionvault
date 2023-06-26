@@ -11,7 +11,7 @@ import java.util.Optional;
 // For the evaluator
 // Task B1:
 // UserRepository extends JpaRepository, which is an example of Inheritance: the ability for one class to inherit fields and methods from another.
-@CrossOrigin
+@CrossOrigin(origins = "https://wgu-visionvault-client-fd3e7c032ecb.herokuapp.com")
 @RequestMapping("/api")
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE u.email = ?1 AND u.password = ?2")

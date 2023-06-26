@@ -10,7 +10,7 @@ import web.capstone.entities.Event;
 
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "https://wgu-visionvault-client-fd3e7c032ecb.herokuapp.com")
 @RequestMapping("/api")
 public interface EventRepository extends JpaRepository<Event, Long> {
 

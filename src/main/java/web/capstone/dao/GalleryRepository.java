@@ -9,7 +9,7 @@ import web.capstone.entities.Gallery;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin
+@CrossOrigin(origins = "https://wgu-visionvault-client-fd3e7c032ecb.herokuapp.com")
 @RequestMapping("/api")
 public interface GalleryRepository extends JpaRepository<Gallery, Long> {
 
