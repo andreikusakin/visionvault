@@ -8,6 +8,7 @@ FOR SPECIFIC TASK INSTRUCTIONS AND REQUIREMENTS FOR THIS ASSESSMENT, PLEASE REFE
 BASIC INSTRUCTIONS
 For this assessment, you will deploy your developed full stack software product to a web service of your choice.
 
+Pipeline demostration for Task 4
 
 ## SUPPLEMENTAL RESOURCES  
 1.	How to clone a project to IntelliJ using Git?
