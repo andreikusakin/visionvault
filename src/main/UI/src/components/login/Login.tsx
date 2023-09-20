@@ -23,12 +23,12 @@ export default function Login() {
     };
 
     axios
-      .post(`/auth`, credentials)
+      .post(`/api/v1/auth/authenticate`, credentials)
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        localStorage.setItem("authUserId", res.data.id);
+        console.log(res)
+        localStorage.setItem("authUserId", res.data.userId);
         localStorage.setItem("authBusinessName", res.data.businessName);
+        localStorage.setItem("token", res.data.token);
         navigate("/dashboard");
         setIsError(false);
       })

@@ -12,11 +12,14 @@ export default function EditGallery() {
   const [description, setDescription] = useState("");
   const [password, setPassword] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
-    const { id } = useParams();
+  const { id } = useParams();
 
   const fetchGallery = async () => {
     try {
-      const response = await axios.get("/mygallery", {
+      const response = await axios.get("/api/v1/galleries/mygallery", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
         params: {
           id,
           userId,
@@ -43,9 +46,9 @@ export default function EditGallery() {
 
   function updateGallery(e: { preventDefault: () => void }) {
     e.preventDefault();
-console.log("updateGallery");
+    console.log("updateGallery");
     const galleryData = {
-        id,
+      id,
       userId,
       name,
       description,
@@ -54,15 +57,15 @@ console.log("updateGallery");
     };
 
     axios
-      .put("/updategallery", galleryData)
+      .put("/api/v1/galleries/updategallery", galleryData, {headers: {
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      }})
       .then((res) => {
         console.log("Succesfully updated", res.data);
         window.location.href = "/dashboard";
       })
       .catch((error) => console.error(error));
   }
-
-  
 
   const PhotoItem = ({ url, index }: { url: string; index: number }) => (
     <div className="grid-item-photolist">
@@ -83,61 +86,62 @@ console.log("updateGallery");
           <CloseIcon fontSize="large" />
         </Link>
         <form className="create-gallery-form" onSubmit={updateGallery}>
-      <input
-        placeholder="Gallery Name"
-        autoComplete="username"
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-        className="input-field"
-      />
+          <input
+            placeholder="Gallery Name"
+            autoComplete="username"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="input-field"
+          />
 
-      <input
-        placeholder="Description"
-        autoComplete="Description"
-        type="text"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        className="input-field"
-      />
-      <label>
-        Incorporate a password security measure for your gallery, ensuring that
-        the gallery's content can be accessed only upon entering the correct
-        password. If you wish for your gallery to be publicly accessible without
-        the necessity of a password, simply leave the password field blank.{" "}
-      </label>
-      <input
-        placeholder="Gallery Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="input-field"
-      />
+          <input
+            placeholder="Description"
+            autoComplete="Description"
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="input-field"
+          />
+          <label>
+            Incorporate a password security measure for your gallery, ensuring
+            that the gallery's content can be accessed only upon entering the
+            correct password. If you wish for your gallery to be publicly
+            accessible without the necessity of a password, simply leave the
+            password field blank.{" "}
+          </label>
+          <input
+            placeholder="Gallery Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="input-field"
+          />
 
-      <input
-        placeholder="Link to Photo"
-        type="url"
-        value={photoUrl}
-        onChange={(e) => setPhotoUrl(e.target.value)}
-        className="input-field"
-      />
-      <button type="button" onClick={addPhoto} className="submit-btn">
-        Add Photo
-      </button>
-      <div className="photo-list">
-      <div className="photo-list-grid">
-        {photoList.map((photoUrl, index) => (
-          <PhotoItem key={index} url={photoUrl} index={index} />
-        ))}
+          <input
+            placeholder="Link to Photo"
+            type="url"
+            value={photoUrl}
+            onChange={(e) => setPhotoUrl(e.target.value)}
+            className="input-field"
+          />
+          <button type="button" onClick={addPhoto} className="submit-btn">
+            Add Photo
+          </button>
+          <div className="photo-list">
+            <div className="photo-list-grid">
+              {photoList.map((photoUrl, index) => (
+                <PhotoItem key={index} url={photoUrl} index={index} />
+              ))}
+            </div>
+          </div>
+
+          <button type="submit" className="submit-btn">
+            Save Gallery
+          </button>
+        </form>
       </div>
     </div>
-
-      <button type="submit" className="submit-btn">
-        Save Gallery
-      </button>
-    </form>
-      </div>
-    </div>
-  )
+  );
 }

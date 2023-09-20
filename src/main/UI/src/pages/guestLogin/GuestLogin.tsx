@@ -17,7 +17,9 @@ export default function GuestLogin() {
 
   useEffect(() => {
     axios
-      .get(`/guestlogin/${id}`)
+      .get(`/api/v1/galleries/guestlogin/${id}`, {headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }})
       .then((res) => {
         setGalleryName(res.data.name);
         setGalleryId(res.data.id);
@@ -32,7 +34,9 @@ export default function GuestLogin() {
     e.preventDefault();
 
     axios
-      .get(`/viewgallery/${galleryId}`, {
+      .get(`/api/v1/galleries/viewgallery/${galleryId}`, {headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
         params: {
           password: password,
           email: email,

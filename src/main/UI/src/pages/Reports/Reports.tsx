@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import './reports.css'
-import axios from 'axios'
-import { Gallery } from '../../components/interfaces';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import React, { useEffect, useState } from "react";
+import "./reports.css";
+import axios from "axios";
+import { Gallery } from "../../components/interfaces";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import CloseIcon from "@mui/icons-material/Close";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 interface Report {
   events: ReportEvent[];
@@ -29,14 +29,13 @@ interface ReportEvent {
   date: number;
 }
 
-
 function Row(props: { row: Report }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
   return (
     <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -49,7 +48,7 @@ function Row(props: { row: Report }) {
         <TableCell component="th" scope="row">
           {row.gallery.name}
         </TableCell>
-        
+
         <TableCell align="right">{row.totalOpenCount}</TableCell>
       </TableRow>
       <TableRow>
@@ -72,9 +71,8 @@ function Row(props: { row: Report }) {
                       <TableCell component="th" scope="row">
                         {historyRow.email}
                       </TableCell>
-                      
+
                       <TableCell align="right">{historyRow.date}</TableCell>
-                      
                     </TableRow>
                   ))}
                 </TableBody>
@@ -87,49 +85,51 @@ function Row(props: { row: Report }) {
   );
 }
 
-
-
-
-
-
 export default function Reports() {
+  const [reportsArray, setReportsArray] = useState([]);
+  useEffect(() => {
+    axios
+      .get("/api/v1/reports/myreports", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        params: { userId: localStorage.getItem("authUserId") },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setReportsArray(res.data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
-
-
-  const [reportsArray, setReportsArray] = useState([])
-useEffect(() => {
-  axios
-  .get('/myreports', {params: {userId: localStorage.getItem('authUserId')}})
-  .then((res) => {
-    console.log(res.data)
-    setReportsArray(res.data)
-  })
-  .catch((error) => console.error(error))
-}, [])
-  
-console.log(reportsArray, "THIIIIS")
+  console.log(reportsArray, "THIIIIS");
   return (
-    <div className='reports-wrapper'>
-      <div className='reports-window'>
-      <div className="reports-close"><Link to='/dashboard' ><CloseIcon fontSize="large" /></Link></div>
-<div className='reports-table'><TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>Gallery Name</TableCell>
-            <TableCell align="right">Total Views</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {reportsArray.map((row: Report) => (
-            <Row key={row.gallery.name} row={row} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer></div>
-
-</div>
+    <div className="reports-wrapper">
+      <div className="reports-window">
+        <div className="reports-close">
+          <Link to="/dashboard">
+            <CloseIcon fontSize="large" />
+          </Link>
+        </div>
+        <div className="reports-table">
+          <TableContainer component={Paper}>
+            <Table aria-label="collapsible table">
+              <TableHead>
+                <TableRow>
+                  <TableCell />
+                  <TableCell>Gallery Name</TableCell>
+                  <TableCell align="right">Total Views</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {reportsArray.map((row: Report) => (
+                  <Row key={row.gallery.name} row={row} />
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+      </div>
     </div>
-  )
+  );
 }

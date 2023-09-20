@@ -18,12 +18,14 @@ export default function Dashboard() {
     setIsUserId(false);
   }
 
-  console.log(localStorage.getItem("authUserId") + "USER ID");
-  console.log(localStorage.getItem("authBusinessName") + "Business Name");
+  console.log(localStorage.getItem("token"))
 
   useEffect(() => {
     axios
-      .get("/mygalleries", {
+      .get("/api/v1/galleries/mygalleries", {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem("token")}`
+        },
         params: {
           userId: localStorage.getItem("authUserId"),
         },

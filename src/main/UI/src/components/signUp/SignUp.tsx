@@ -26,7 +26,7 @@ export default function SignUp() {
     };
 
     axios
-      .post(`/users`, user)
+      .post(`/api/v1/auth/signup`, user)
       .then((res) => {
         console.log(res);
         console.log(res.data);

@@ -16,7 +16,9 @@ export default function GalleryItem(props: GalleryItemProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   function deleteGallery() {
     axios
-    .delete(`/gallery/${gallery.id}`)
+    .delete(`/api/v1/galleries/gallery/${gallery.id}`, {headers: {
+      'Authorization': `Bearer ${localStorage.getItem("token")}`
+    }})
     .then((res) => {
       console.log("Succesfully deleted", res.data);
       window.location.href = "/dashboard";

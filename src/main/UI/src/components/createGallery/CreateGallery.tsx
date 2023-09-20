@@ -36,7 +36,9 @@ export default function CreateGallery() {
     };
 
     axios
-      .post("/creategallery", galleryData)
+      .post("/api/v1/galleries/creategallery", galleryData, {headers: {
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      }})
       .then((res) => {
         console.log("Succesfull response", res.data);
         window.location.href = "/dashboard";
