@@ -9,7 +9,7 @@ import web.capstone.entities.Gallery;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "https://wgu-visionvault-client-fd3e7c032ecb.herokuapp.com")
+@CrossOrigin
 @RequestMapping("/api")
 public interface GalleryRepository extends JpaRepository<Gallery, Long> {
 
@@ -21,4 +21,6 @@ public interface GalleryRepository extends JpaRepository<Gallery, Long> {
 
     @Query("SELECT g FROM Gallery g WHERE g.id = ?1 And g.password = ?2")
     Optional<Gallery> findByIdAndPassword(Long id, String password);
+
+
 }

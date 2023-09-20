@@ -9,8 +9,8 @@ import web.capstone.services.ReportService;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://wgu-visionvault-client-fd3e7c032ecb.herokuapp.com")
-@RequestMapping("")
+@CrossOrigin
+@RequestMapping("/api/v1/reports")
 public class ReportController {
     final ReportService reportService;
 

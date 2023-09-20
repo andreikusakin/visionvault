@@ -3,6 +3,7 @@ package web.capstone.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import web.capstone.dao.EventRepository;
 import web.capstone.dao.GalleryRepository;
@@ -14,6 +15,7 @@ import web.capstone.entities.Picture;
 import web.capstone.entities.User;
 import web.capstone.model.request.CreateGalleryRequest;
 import web.capstone.model.request.UpdateGalleryRequest;
+import web.capstone.model.request.UpdateGalleryRequest;
 
 import java.util.Date;
 import java.util.List;
@@ -22,13 +24,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "https://wgu-visionvault-client-fd3e7c032ecb.herokuapp.com")
-@RequestMapping("")
+@CrossOrigin
+@RequestMapping("/api/v1/galleries")
 public class GalleryController {
     final GalleryRepository galleryRepository;
     final PictureRepository pictureRepository;
     final UserRepository userRepository;
     final EventRepository eventRepository;
+
+
 
 
     public GalleryController(GalleryRepository galleryRepository, PictureRepository pictureRepository, UserRepository userRepository, EventRepository eventRepository) {

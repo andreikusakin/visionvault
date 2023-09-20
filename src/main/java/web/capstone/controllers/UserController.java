@@ -1,34 +1,36 @@
 package web.capstone.controllers;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import web.capstone.dao.UserRepository;
-import web.capstone.entities.User;
-import web.capstone.model.request.AuthenticateUserRequest;
+import web.capstone.model.AuthenticationResponse;
+import web.capstone.model.request.AuthenticationRequest;
+import web.capstone.model.request.SignUpRequest;
+import web.capstone.services.AuthenticationService;
 
-import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "https://wgu-visionvault-client-fd3e7c032ecb.herokuapp.com")
-@RequestMapping("")
+@CrossOrigin(origins = "http://localhost:3000/users")
+@RequestMapping("/api/v1/auth")
+@RequiredArgsConstructor
 public class UserController {
-    final UserRepository userRepository;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    private final AuthenticationService authenticationService;
+
+    @PostMapping("/signup")
+    public ResponseEntity<AuthenticationResponse> signUp(
+            @RequestBody SignUpRequest request
+    ) {
+        return ResponseEntity.ok(authenticationService.signUp(request));
     }
-    @RequestMapping(path = "/auth", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> authenticateUser(@RequestBody AuthenticateUserRequest request) {
-        System.out.println("request: " + request.getEmail() + request.getPassword());
-        Optional<User> foundUser = userRepository.findUserByEmailAndPassword(request.getEmail(), request.getPassword());
-        if (foundUser.isPresent()) {
-            return new ResponseEntity<>(foundUser.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
-        }
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthenticationResponse> authenticate(
+            @RequestBody AuthenticationRequest request
+    ) {
+        return ResponseEntity.ok(authenticationService.authenticate(request));
     }
+
+
 }

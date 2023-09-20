@@ -9,8 +9,8 @@ import web.capstone.entities.Picture;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://wgu-visionvault-client-fd3e7c032ecb.herokuapp.com")
-@RequestMapping("")
+@CrossOrigin
+@RequestMapping("/api/v1/pictures")
 public class PictureController {
     final PictureRepository pictureRepository;
 
