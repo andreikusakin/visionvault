@@ -49,7 +49,6 @@ export default function GuestLogin() {
 
         setPictures(res.data.pictures);
 
-        // window.location.href = `/viewgallery/${id}`;
       })
       .catch((error) => {
         console.error(error);
@@ -58,11 +57,6 @@ export default function GuestLogin() {
         }
       });
   }
-
-  // useEffect(() => {
-  //   console.log("pictures", pictures);
-  //   console.log("coverUrl", coverUrl);
-  // }, [pictures]);
 
   return (
     <div>
