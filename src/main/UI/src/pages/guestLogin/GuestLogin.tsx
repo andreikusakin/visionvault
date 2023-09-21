@@ -24,7 +24,7 @@ export default function GuestLogin() {
         setGalleryName(res.data.name);
         setGalleryId(res.data.id);
         setCoverUrl(res.data.coverUrl);
-        console.log("Succesfully ", res.data);
+        
       })
       .catch((error) => {console.error(error)
       window.location.href = "/404"});
@@ -43,7 +43,7 @@ export default function GuestLogin() {
         },
       })
       .then((res) => {
-        console.log("Succesfully ", res.data);
+        
         setIsError(false);
         setIsSuccess(true);
 
@@ -59,10 +59,10 @@ export default function GuestLogin() {
       });
   }
 
-  useEffect(() => {
-    console.log("pictures", pictures);
-    console.log("coverUrl", coverUrl);
-  }, [pictures]);
+  // useEffect(() => {
+  //   console.log("pictures", pictures);
+  //   console.log("coverUrl", coverUrl);
+  // }, [pictures]);
 
   return (
     <div>

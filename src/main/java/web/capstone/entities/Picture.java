@@ -6,18 +6,18 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "pictures", indexes = {@Index(name = "index_gallery_id", columnList = "gallery_id")})
-
+@Table(
+    name = "pictures",
+    indexes = {@Index(name = "index_gallery_id", columnList = "gallery_id")})
 public class Picture {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    private String url;
+  private String url;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "gallery_id")
-    @JsonIgnore
-    private Gallery gallery;
-
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @JoinColumn(name = "gallery_id")
+  @JsonIgnore
+  private Gallery gallery;
 }

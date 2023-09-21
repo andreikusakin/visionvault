@@ -14,7 +14,6 @@ function App() {
     setIsUserId(false);
   }
 
-  console.log(localStorage.getItem("token"))
 
   return (
     <div className="main-page-wrapper">

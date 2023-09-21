@@ -96,13 +96,13 @@ export default function Reports() {
         params: { userId: localStorage.getItem("authUserId") },
       })
       .then((res) => {
-        console.log(res.data);
+        
         setReportsArray(res.data);
       })
       .catch((error) => console.error(error));
   }, []);
 
-  console.log(reportsArray, "THIIIIS");
+  
   return (
     <div className="reports-wrapper">
       <div className="reports-window">

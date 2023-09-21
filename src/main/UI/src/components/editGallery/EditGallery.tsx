@@ -46,7 +46,7 @@ export default function EditGallery() {
 
   function updateGallery(e: { preventDefault: () => void }) {
     e.preventDefault();
-    console.log("updateGallery");
+    
     const galleryData = {
       id,
       userId,
@@ -61,7 +61,7 @@ export default function EditGallery() {
         'Authorization': `Bearer ${localStorage.getItem("token")}`
       }})
       .then((res) => {
-        console.log("Succesfully updated", res.data);
+        
         window.location.href = "/dashboard";
       })
       .catch((error) => console.error(error));

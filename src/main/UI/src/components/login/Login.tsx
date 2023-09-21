@@ -25,7 +25,7 @@ export default function Login() {
     axios
       .post(`/api/v1/auth/authenticate`, credentials)
       .then((res) => {
-        console.log(res)
+        
         localStorage.setItem("authUserId", res.data.userId);
         localStorage.setItem("authBusinessName", res.data.businessName);
         localStorage.setItem("token", res.data.token);

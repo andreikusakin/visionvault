@@ -40,7 +40,7 @@ export default function CreateGallery() {
         'Authorization': `Bearer ${localStorage.getItem("token")}`
       }})
       .then((res) => {
-        console.log("Succesfull response", res.data);
+        
         window.location.href = "/dashboard";
       })
       .catch((error) => console.error(error));

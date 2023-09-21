@@ -1,9 +1,9 @@
 package web.capstone.services;
 
+import java.util.List;
 import web.capstone.model.Report;
 
-import java.util.List;
-
 public interface ReportService {
-    List<Report> getAllUserReports(Long userId);
+
+  List<Report> getAllUserReports(Long userId);
 }

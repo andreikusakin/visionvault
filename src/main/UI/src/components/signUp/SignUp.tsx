@@ -28,8 +28,7 @@ export default function SignUp() {
     axios
       .post(`/api/v1/auth/signup`, user)
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
+        
         window.location.href = "/login";
       })
       .catch((error) => {

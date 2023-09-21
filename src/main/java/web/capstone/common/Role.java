@@ -1,4 +1,4 @@
-package web.capstone.config;
+package web.capstone.common;
 
 public enum Role {
 

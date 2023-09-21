@@ -20,7 +20,7 @@ export default function GalleryItem(props: GalleryItemProps) {
       'Authorization': `Bearer ${localStorage.getItem("token")}`
     }})
     .then((res) => {
-      console.log("Succesfully deleted", res.data);
+      
       window.location.href = "/dashboard";
     })
     .catch((error) => console.error(error));

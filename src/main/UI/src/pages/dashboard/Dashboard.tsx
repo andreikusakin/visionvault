@@ -18,7 +18,7 @@ export default function Dashboard() {
     setIsUserId(false);
   }
 
-  console.log(localStorage.getItem("token"))
+  
 
   useEffect(() => {
     axios

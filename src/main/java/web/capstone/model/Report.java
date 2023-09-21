@@ -8,13 +8,13 @@ import java.util.List;
 
 @Data
 public class Report {
-    private Gallery gallery;
-    private Long totalOpenCount;
-    List<Event> events;
+  private Gallery gallery;
+  private Long totalOpenCount;
+  List<Event> events;
 
-    public Report(Gallery gallery, Long totalOpenCount, List<Event> events) {
-        this.gallery = gallery;
-        this.totalOpenCount = totalOpenCount;
-        this.events = events;
-    }
+  public Report(Gallery gallery, Long totalOpenCount, List<Event> events) {
+    this.gallery = gallery;
+    this.totalOpenCount = totalOpenCount;
+    this.events = events;
+  }
 }
