@@ -1,30 +1,55 @@
-<strong>**DO NOT DISTRIBUTE OR PUBLICLY POST SOLUTIONS TO THESE LABS. MAKE ALL FORKS OF THIS REPOSITORY WITH SOLUTION CODE PRIVATE. PLEASE REFER TO THE STUDENT CODE OF CONDUCT AND ETHICAL EXPECTATIONS FOR COLLEGE OF INFORMATION TECHNOLOGY STUDENTS FOR SPECIFICS. **</strong>
+# VisionVault
 
-# WESTERN GOVERNOR UNIVERSITY 
-## D424 – SOFTWARE ENGINEERING CAPSTONE
-Welcome to Software Engineering Capstone! This is an opportunity for students to develop full stack software engineering documentation and applications. They will execute documentation, unit testing, revision of software applications, and deploy software applications with scripts and containers on a cloud platform.
+VisionVault is a web-based application designed to cater to the needs of photo industry professionals, facilitating
+secure, efficient management and delivery of their work. The application's front end is built with React: a JavaScript
+library well-known for its flexibility and efficiency in building interactive user interfaces.
+The application's back end uses Java and Spring Boot framework. The use of Spring Boot provides many benefits: it makes
+the application easy to set up, improve, scale, and maintain because of the extensive set of various libraries and tools
+developed by the Java/Spring Boot community over the years.
+Postgres database system was chosen for the project. Postgres offers a wide range of tools for storing and managing
+extensive data sets with powerful security features, making it an ideal choice for VisionVault.
+The application uses REST API for the communication between the front-end and back-end because of its simplicity,
+scalability, and reliability.
 
-FOR SPECIFIC TASK INSTRUCTIONS AND REQUIREMENTS FOR THIS ASSESSMENT, PLEASE REFER TO THE COURSE PAGE.
-BASIC INSTRUCTIONS
-For this assessment, you will deploy your developed full stack software product to a web service of your choice.
+# Setup
 
-Pipeline demostration for Task 4
+Follow the steps below to set up and run VisionVault on your local machine for development and maintenance purposes:
 
-## SUPPLEMENTAL RESOURCES  
-1.	How to clone a project to IntelliJ using Git?
+1. Get the Project
+   Clone the repository using Git or extract the project from the provided zip file into your desired directory.
 
-> Ensure that you have Git installed on your system and that IntelliJ is installed using [Toolbox](https://www.jetbrains.com/toolbox-app/). Make sure that you are using version 2022.3.2. Once this has been confirmed, click the clone button and use the 'IntelliJ IDEA (HTTPS)' button. This will open IntelliJ with a prompt to clone the proejct. Save it in a safe location for the directory and press clone. IntelliJ will prompt you for your credentials. Enter in your WGU Credentials and the project will be cloned onto your local machine.  
+2. Set Up the Database
+   Open the application.properties file found in the src/main/resources directory and update the following fields with
+   your Postgres database details:
 
-2. How to create a branch and start Development?
+spring.datasource.url=<your-database-url>
+spring.datasource.username=<your-database-username>
+spring.datasource.password=<your-database-password>
 
-- GitLab method
-> Press the '+' button located near your branch name. In the dropdown list, press the 'New branch' button. This will allow you to create a name for your branch. Once the branch has been named, you can select 'Create Branch' to push the branch to your repository.
+3. Install npm and mvn
+   You need npm (Node Package Manager) for the front-end and Maven (mvn) for the back-end. If you don't have these
+   installed, you can do it with Homebrew by running:
+   brew install npm mvn
 
-- IntelliJ method
-> In IntelliJ, Go to the 'Git' button on the top toolbar. Select the new branch option and create a name for the branch. Make sure checkout branch is selected and press create. You can now add a commit message and push the new branch to the local repo.
 
-## SUPPORT
-If you need additional support, please navigate to the course page and reach out to your course instructor.
+4. Install Front-End Dependencies
+   Navigate to the root of the project folder and install the necessary Node.js dependencies for the front-end by
+   running:
+   npm i ./src/main/UI/
 
-## FUTURE USE
-Take this opportunity to create or add to a simple resume portfolio to highlight and showcase your work for future use in career search, experience, and education!
+5. Build the Project
+   Still from the root of the project folder, build the project with Maven by running:
+   mvn package
+
+6. Start the Server
+   Start the Spring Boot server by running:
+   mvn spring-boot:run
+
+7. Start the Client
+   Finally, navigate to the front-end directory and start the React client by running:
+   cd ./src/main/UI/
+   npm run start
+
+Now VisionVault should be up and running on your local machine. Please ensure the server and client are running for the
+application to function correctly. Repeat the build and start steps as necessary for any modifications or updates.
+ 
