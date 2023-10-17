@@ -21,7 +21,6 @@ import web.capstone.model.request.CreateGalleryRequest;
 import web.capstone.model.request.UpdateGalleryRequest;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/v1/galleries")
 public class GalleryController {
   final GalleryRepository galleryRepository;

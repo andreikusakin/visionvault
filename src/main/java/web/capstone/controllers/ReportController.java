@@ -8,7 +8,6 @@ import web.capstone.model.Report;
 import web.capstone.services.ReportService;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/v1/reports")
 public class ReportController {
   final ReportService reportService;

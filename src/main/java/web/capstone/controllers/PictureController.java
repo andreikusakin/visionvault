@@ -8,7 +8,6 @@ import web.capstone.dao.PictureRepository;
 import web.capstone.entities.Picture;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/v1/pictures")
 public class PictureController {
   final PictureRepository pictureRepository;

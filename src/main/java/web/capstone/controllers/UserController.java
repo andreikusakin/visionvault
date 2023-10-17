@@ -9,7 +9,6 @@ import web.capstone.model.request.SignUpRequest;
 import web.capstone.services.AuthenticationService;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class UserController {
